@@ -28,7 +28,6 @@ export default function Calendar(props) {
   const [finalState, setFinalState] = useState([]);
   const [mark, setMark] = useState([]);
   const [filter, setFilter] = useState('default');
-  const [sportTypes, setSportTypes] = useState([]);
 
   const handletitleClassName = (value) => {
     if (mark.find((x) => x === moment(value.date).format('DD.MM.YYYY'))) {
@@ -47,8 +46,9 @@ export default function Calendar(props) {
       getFilteredEvents(parseInt(filter), setFinalState);
     }
   }, [filter]);
+
   useEffect(() => {
-    getSportTypes(setSportTypes);
+    getSportTypes(props.setSportTypes);
   }, []);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function Calendar(props) {
         <button onClick={() => props.setInputModal(true)}>Hinzufügen</button>
         <select name="cars" onChange={(e) => setFilter(e.target.value)}>
           <option value="default">Alle Sportarten</option>
-          {sportTypes.map((sportType, index) => {
+          {props.sportTypes.map((sportType, index) => {
             return (
               <option key={index} value={sportType.id}>
                 {sportType.sport_type}
