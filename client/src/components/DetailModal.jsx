@@ -30,7 +30,6 @@ export default function DetailModal(props) {
     .sort((a, b) => {
       return a.sportTime.localeCompare(b.sportTime);
     });
-  console.log(sortedFinalState);
 
   if (!props.detailModal) return null;
   return (
@@ -38,7 +37,26 @@ export default function DetailModal(props) {
       <div css={overlay()}>
         <div css={styles()}>
           <button onClick={() => props.setDetailModal(false)}>close</button>
-          <h1>Hello Wolrd</h1>
+          <table>
+            <tr>
+              <th>Uhrzeit</th>
+              <th>Datum</th>
+              <th>Title</th>
+              <th>Sportart</th>
+            </tr>
+            {sortedFinalState
+              ? sortedFinalState.map((sportEvent, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{sportEvent.sportTime}</td>
+                      <td>{sportEvent.sportDate}</td>
+                      <td>{sportEvent.sportEvent}</td>
+                      <td>{sportEvent.sportType}</td>
+                    </tr>
+                  );
+                })
+              : null}
+          </table>
         </div>
       </div>
     </>
