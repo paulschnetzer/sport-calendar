@@ -37,6 +37,7 @@ export default function Calendar(props) {
 
   const handleOnChange = (date) => {
     setDate(date);
+    props.setDetailModal(true);
   };
 
   useEffect(() => {
