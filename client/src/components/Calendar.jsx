@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import React, { useState, useEffect } from 'react';
 import { Calendar as CalendarLibary } from 'react-calendar';
+import plus from '../img/plus.svg';
 import 'react-calendar/dist/Calendar.css';
 import {
   getAllEvents,
@@ -11,6 +12,44 @@ import {
 import moment from 'moment';
 
 const styles = () => css`
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .button-container {
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+    select {
+      border-radius: 10px;
+      margin-bottom: 10px;
+      padding: 10px 20px;
+      :focus {
+        border-radius: 10px 10px 0 0;
+      }
+    }
+    button {
+      background-color: #6567d8;
+      color: white;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 90%;
+      letter-spacing: 1.3px;
+      transition: 0.2s ease-in;
+      :hover {
+        background-color: #7a7cf5;
+      }
+      img {
+        height: 20px;
+        margin-right: 10px;
+      }
+    }
+  }
   .react-calendar {
     width: 350px;
     .react-calendar__tile--active {
@@ -25,7 +64,6 @@ const styles = () => css`
 
 export default function Calendar(props) {
   const [date, setDate] = useState(new Date());
-
   const [mark, setMark] = useState([]);
   const [filter, setFilter] = useState('default');
 
@@ -59,8 +97,11 @@ export default function Calendar(props) {
 
   return (
     <div css={styles()}>
-      <div>
-        <button onClick={() => props.setInputModal(true)}>Hinzufügen</button>
+      <div className="button-container">
+        <button onClick={() => props.setInputModal(true)}>
+          <img src={plus} alt="plus" />
+          Hinzufügen
+        </button>
         <select name="cars" onChange={(e) => setFilter(e.target.value)}>
           <option value="default">Alle Sportarten</option>
           {props.sportTypes.map((sportType, index) => {
