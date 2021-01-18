@@ -23,7 +23,7 @@ const styles = () => css`
   }
 `;
 
-export default function Calendar() {
+export default function Calendar(props) {
   const [date, setDate] = useState(new Date());
   const [finalState, setFinalState] = useState([]);
   const [mark, setMark] = useState([]);
@@ -58,6 +58,7 @@ export default function Calendar() {
   return (
     <div css={styles()}>
       <div>
+        <button onClick={() => props.setInputModal(true)}>Hinzufügen</button>
         <select name="cars" onChange={(e) => setFilter(e.target.value)}>
           <option value="default">Alle Sportarten</option>
           {sportTypes.map((sportType, index) => {
