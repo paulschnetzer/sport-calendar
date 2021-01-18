@@ -1,7 +1,12 @@
+import Calendar from './components/Calendar';
+import InputModal from './components/InputModal';
+import DetailModal from './components/DetailModal';
 function App() {
   return (
-    <div className="App">
-      <h1>Hello world</h1>
+    <div>
+      <Calendar />
+      <DetailModal />
+      <InputModal />
     </div>
   );
 }
