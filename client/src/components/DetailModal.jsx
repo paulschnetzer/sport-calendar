@@ -2,6 +2,7 @@ import React from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { handleDelete } from '../util/fetchData';
+import close from '../img/close.svg';
 
 const styles = () => css`
   position: fixed;
@@ -14,6 +15,47 @@ const styles = () => css`
   background-color: white;
   border-radius: 10px;
   font-size: 80%;
+  .close {
+    padding: 0;
+    margin: 0;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    float: right;
+    margin-top: -10px;
+    margin-right: -10px;
+  }
+  img {
+    height: 30px;
+  }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border: none;
+    button {
+      background-color: #f03535;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      letter-spacing: 1.3px;
+      transition: 0.2s ease-in;
+      :hover {
+        background-color: #ff5757;
+      }
+    }
+    td,
+    th {
+      text-align: left;
+      padding: 8px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  }
 `;
 const overlay = () => css`
   position: fixed;
@@ -37,7 +79,9 @@ export default function DetailModal(props) {
     <>
       <div css={overlay()}>
         <div css={styles()}>
-          <button onClick={() => props.setDetailModal(false)}>close</button>
+          <button onClick={() => props.setDetailModal(false)} className="close">
+            <img src={close} alt="close" />
+          </button>
           <table>
             <tr>
               <th>Uhrzeit</th>
