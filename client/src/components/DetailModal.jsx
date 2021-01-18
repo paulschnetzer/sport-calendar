@@ -1,6 +1,7 @@
 import React from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { handleDelete } from '../util/fetchData';
 
 const styles = () => css`
   position: fixed;
@@ -52,6 +53,19 @@ export default function DetailModal(props) {
                       <td>{sportEvent.sportDate}</td>
                       <td>{sportEvent.sportEvent}</td>
                       <td>{sportEvent.sportType}</td>
+                      <td>
+                        <button
+                          onClick={() =>
+                            handleDelete(
+                              sportEvent.id,
+                              props.setFinalState,
+                              props.finalState,
+                            )
+                          }
+                        >
+                          Löschen
+                        </button>
+                      </td>
                     </tr>
                   );
                 })
