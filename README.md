@@ -3,7 +3,7 @@
 1. Create a postgres Database (based on the schema below)
 2. Add as many sports as you want to the sport_types table
 3. Change the name db_example.js to db.js and put in the required fields.
-4. Don’t’t forget to install the dependencies (e.g. express, emotion etc.)
+4. Don’t forget to install the dependencies (e.g. express, emotion etc.)
 
 ## ERD-Diagram
 
