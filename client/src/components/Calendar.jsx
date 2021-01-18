@@ -3,7 +3,11 @@ import { css } from '@emotion/react';
 import React, { useState, useEffect } from 'react';
 import { Calendar as CalendarLibary } from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { getAllEvents } from '../util/fetchData';
+import {
+  getAllEvents,
+  getSportTypes,
+  getFilteredEvents,
+} from '../util/fetchData';
 import moment from 'moment';
 
 const styles = () => css`
@@ -23,6 +27,8 @@ export default function Calendar() {
   const [date, setDate] = useState(new Date());
   const [finalState, setFinalState] = useState([]);
   const [mark, setMark] = useState([]);
+  const [filter, setFilter] = useState('default');
+  const [sportTypes, setSportTypes] = useState([]);
 
   const handletitleClassName = (value) => {
     if (mark.find((x) => x === moment(value.date).format('DD.MM.YYYY'))) {
@@ -33,18 +39,36 @@ export default function Calendar() {
   const handleOnChange = (date) => {
     setDate(date);
   };
-  console.log(date);
-  console.log(finalState);
 
   useEffect(() => {
-    getAllEvents(setFinalState);
+    if (filter === 'default') {
+      getAllEvents(setFinalState);
+    } else {
+      getFilteredEvents(parseInt(filter), setFinalState);
+    }
+  }, [filter]);
+  useEffect(() => {
+    getSportTypes(setSportTypes);
   }, []);
+
   useEffect(() => {
     setMark(finalState.map((sportEvent) => sportEvent.sportDate));
   }, [finalState]);
 
   return (
     <div css={styles()}>
+      <div>
+        <select name="cars" onChange={(e) => setFilter(e.target.value)}>
+          <option value="default">Alle Sportarten</option>
+          {sportTypes.map((sportType, index) => {
+            return (
+              <option key={index} value={sportType.id}>
+                {sportType.sport_type}
+              </option>
+            );
+          })}
+        </select>
+      </div>
       <CalendarLibary
         onChange={handleOnChange}
         value={date}
