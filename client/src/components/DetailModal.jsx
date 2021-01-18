@@ -25,10 +25,12 @@ const overlay = () => css`
 `;
 
 export default function DetailModal(props) {
-  const filteredFinalState = props.finalState.filter(
-    (sportEvent) => sportEvent.sportDate === props.selectedDate,
-  );
-  console.log(filteredFinalState);
+  const sortedFinalState = props.finalState
+    .filter((sportEvent) => sportEvent.sportDate === props.selectedDate)
+    .sort((a, b) => {
+      return a.sportTime.localeCompare(b.sportTime);
+    });
+  console.log(sortedFinalState);
 
   if (!props.detailModal) return null;
   return (
