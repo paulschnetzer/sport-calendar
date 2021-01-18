@@ -25,6 +25,11 @@ const overlay = () => css`
 `;
 
 export default function DetailModal(props) {
+  const filteredFinalState = props.finalState.filter(
+    (sportEvent) => sportEvent.sportDate === props.selectedDate,
+  );
+  console.log(filteredFinalState);
+
   if (!props.detailModal) return null;
   return (
     <>

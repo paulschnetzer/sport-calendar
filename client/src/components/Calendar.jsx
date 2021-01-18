@@ -25,7 +25,7 @@ const styles = () => css`
 
 export default function Calendar(props) {
   const [date, setDate] = useState(new Date());
-  const [finalState, setFinalState] = useState([]);
+
   const [mark, setMark] = useState([]);
   const [filter, setFilter] = useState('default');
 
@@ -38,13 +38,14 @@ export default function Calendar(props) {
   const handleOnChange = (date) => {
     setDate(date);
     props.setDetailModal(true);
+    props.setSelectedDate(moment(date).format('DD.MM.YYYY'));
   };
 
   useEffect(() => {
     if (filter === 'default') {
-      getAllEvents(setFinalState);
+      getAllEvents(props.setFinalState);
     } else {
-      getFilteredEvents(parseInt(filter), setFinalState);
+      getFilteredEvents(parseInt(filter), props.setFinalState);
     }
   }, [filter]);
 
@@ -53,8 +54,8 @@ export default function Calendar(props) {
   }, []);
 
   useEffect(() => {
-    setMark(finalState.map((sportEvent) => sportEvent.sportDate));
-  }, [finalState]);
+    setMark(props.finalState.map((sportEvent) => sportEvent.sportDate));
+  }, [props.finalState]);
 
   return (
     <div css={styles()}>
